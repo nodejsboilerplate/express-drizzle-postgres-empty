@@ -33,17 +33,6 @@ COPY . .
 
 ENV NODE_ENV=production
 
-# Build the "emails" workspace package first (if present)
-RUN if [ -f package-lock.json ]; then \
-    npm run build:package --workspace=emails; \
-  elif [ -f yarn.lock ]; then \
-    corepack enable yarn && yarn workspace emails run build:package; \
-  elif [ -f pnpm-lock.yaml ]; then \
-    corepack enable pnpm && pnpm --filter emails run build:package; \
-  else \
-    echo "No lockfile found." && exit 1; \
-  fi
-
 # Build the main app
 RUN if [ -f package-lock.json ]; then \
     npm run build; \
@@ -64,9 +53,6 @@ RUN adduser --system --uid 1001 express
 
 COPY --from=builder --chown=express:nodejs  /app/package*.json .
 COPY --from=builder --chown=express:nodejs  /app/node_modules ./node_modules
-COPY --from=builder --chown=express:nodejs  /app/emails/dist ./emails/dist
-COPY --from=builder --chown=express:nodejs  /app/emails/node_modules ./emails/node_modules
-COPY --from=builder --chown=express:nodejs  /app/emails/package*.json ./emails/
 COPY --from=builder --chown=express:nodejs  /app/dist ./dist
 
 EXPOSE 3000
