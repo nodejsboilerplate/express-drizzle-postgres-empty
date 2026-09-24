@@ -5,6 +5,5 @@ export abstract class ZodBase {
     created_at: z4.coerce.date().optional(),
     updated_at: z4.coerce.date().optional(),
   });
-
 }
 export type TimestampsZtype = z4.infer<typeof ZodBase.timestamps>;

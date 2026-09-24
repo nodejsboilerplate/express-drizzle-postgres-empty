@@ -58,7 +58,7 @@ export const SystemCustomErrorMsgByCode: SystemCustomErrorMessageType = {
     message: "One or more fields failed validation.",
     code: SystemCustomErrorCode.VALIDATION_ERROR,
   },
- 
+
   [SystemCustomErrorCode.WEBHOOK_SECRET_NOT_CONFIGURED]: {
     title: "Webhook Not Configured",
     message: "The webhook secret has not been configured on the server.",

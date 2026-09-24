@@ -7,6 +7,5 @@ export const apiRouters = (container: ReturnType<typeof createContainer>) => {
 
   router.use("/v1/users", fooRouter(container));
 
-
   return router;
 };
