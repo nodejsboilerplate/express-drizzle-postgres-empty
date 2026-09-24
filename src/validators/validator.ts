@@ -1,4 +1,4 @@
-import { ZodBase, type IdZType } from "@/zod";
+import { ZodBase } from "@/zod";
 import type z from "zod";
 
 export class Validator {
@@ -11,14 +11,5 @@ export class Validator {
       return { error: validatePayload.error, success: false };
     }
     return { data: validatePayload.data, success: true };
-  }
-
-  idInput(payload: IdZType): IdZType | z.ZodError {
-    const { data, success, error } = this.validate(payload, ZodBase.id);
-
-    if (!success) {
-      return error;
-    }
-    return data;
   }
 }
